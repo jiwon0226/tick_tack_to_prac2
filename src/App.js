@@ -1,6 +1,7 @@
 import { useState } from "react"; //기억할 수 있는 유즈스테이트
 
-function Square() {
+function Square({ value, onSquareClick }) {
+  //props를 value와 onSquareClick로 세팅
   const [value, setValue] = useState(null); //value를 setValue로 세팅하겠다.
   //null은 초기값이라 지금 value는 null이다.
 
@@ -12,18 +13,19 @@ function Square() {
   }
 
   return (
-    <button className="square" onClick={handleClick}>
+    //클릭하면 온스퀘어클릭
+    <button className="square" onClick={onSquareClick}>
       {value}
     </button> //value</button>; //중복되는 코드 함수화하기
     //인수값을 받아서 보여주기, onClick은 {handleClick} -> 클릭글씨 보여줌
   );
 }
 
-export default function board() {
+export default function Board() {
   //함수 정의
   // export는 외부에서 접근할 수 있고, default는 다른 파일에서 주요 함수임을 알려줌
 
-  const [sequares, setSquares] = useState(Array(9).fill(null));
+  const [squares, setSquares] = useState(Array(9).fill(null));
   //틱택토는 9칸의 상태를 모두 알고 있어야 함
   //null값을 기본으로 갖는 9칸 배열을 갖는 squares라는 state 변수를 선언
   return (
