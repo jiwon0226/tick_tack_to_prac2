@@ -2,15 +2,6 @@ import { useState } from "react"; //기억할 수 있는 유즈스테이트
 
 function Square({ value, onSquareClick }) {
   //props를 value와 onSquareClick로 세팅
-  const [value, setValue] = useState(null); //value를 setValue로 세팅하겠다.
-  //null은 초기값이라 지금 value는 null이다.
-
-  function handleClick() {
-    //console.log("click");
-    //클릭이라는 글씨를 콘솔에서 보여줌
-    // -> setValue를 'x'로 설정하겠다.
-    setValue("X");
-  }
 
   return (
     //클릭하면 온스퀘어클릭
@@ -28,24 +19,34 @@ export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   //틱택토는 9칸의 상태를 모두 알고 있어야 함
   //null값을 기본으로 갖는 9칸 배열을 갖는 squares라는 state 변수를 선언
+
+  function handleClick(i) {
+    const nextSquares = squares.slice(); //배열 내용 옮겨 담기, array 유지한 채, 껍데기 만들기
+    nextSquares[i] = "X"; //i번째 칸 x
+    setSquares(nextSquares); //nextSquares를 변경된 state로 저장
+  }
   return (
     <>
       <div className="board-row">
-        <Square value={squares[0]} />
-        <Square value={squares[1]} />
-        <Square value={squares[2]} />
+        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
+        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
+        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
       </div>
       <div className="board-row">
-        <Square value={squares[3]} />
-        <Square value={squares[4]} />
-        <Square value={squares[5]} />
+        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
+        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
+        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
       </div>
       <div className="board-row">
-        <Square value={squares[6]} />
-        <Square value={squares[7]} />
-        <Square value={squares[8]} />
+        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
+        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
+        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
       </div>
     </>
   );
+  //<Square value={squares[0]} onSquareClick={handleClick(0)} />
+  //handleClick(0)는 이미 함수가 호출되고 있는 것 이므로, 너무 일찍 시행되는 것
+  // 원래는 클릭해야 작동해야하잖슴
+  //() => handleClick(0)은 화살표 함수로, 함수를 짧게 정의할 수 있는 방법
   //value 프롭 전달 (squares)
 }
