@@ -16,7 +16,7 @@ export default function board() {
       <div className="board-row">
         <button className="square">1</button>
         <button className="square">5</button>
-        <button className="square">1</button>
+        <button className="square">x</button>
       </div>
     </>
   );
