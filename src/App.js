@@ -18,6 +18,11 @@ export default function board() {
         <button className="square">5</button>
         <button className="square">x</button>
       </div>
+      <div className="board-row">
+        <button className="square">1</button>
+        <button className="square">5</button>
+        <button className="square">x</button>
+      </div>
     </>
   );
 }
