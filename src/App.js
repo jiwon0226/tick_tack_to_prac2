@@ -15,15 +15,21 @@ function Square({ value, onSquareClick }) {
 export default function Board() {
   //함수 정의
   // export는 외부에서 접근할 수 있고, default는 다른 파일에서 주요 함수임을 알려줌
-
+  const [xIsNext, setXIsNext] = useState(true); //다음이 x인지
   const [squares, setSquares] = useState(Array(9).fill(null));
   //틱택토는 9칸의 상태를 모두 알고 있어야 함
   //null값을 기본으로 갖는 9칸 배열을 갖는 squares라는 state 변수를 선언
 
   function handleClick(i) {
     const nextSquares = squares.slice(); //배열 내용 옮겨 담기, array 유지한 채, 껍데기 만들기
-    nextSquares[i] = "X"; //i번째 칸 x
+    if (xIsNext) {
+      nextSquares[i] = "X";
+    } else {
+      nextSquares[i] = "O";
+    }
+    //nextSquares[i] = "X"; //i번째 칸 x
     setSquares(nextSquares); //nextSquares를 변경된 state로 저장
+    setXIsNext(!xIsNext); //순서가 끝나면 바꿔줘
   }
   return (
     <>
