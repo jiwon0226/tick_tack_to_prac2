@@ -1,7 +1,14 @@
-function Square({ value }) {
+import { useState } from "react"; //기억할 수 있는 유즈스테이트
+
+function Square() {
+  const [value, setValue] = useState(null); //value를 setValue로 세팅하겠다.
+  //null은 초기값이라 지금 value는 null이다.
+
   function handleClick() {
-    console.log("click");
+    //console.log("click");
     //클릭이라는 글씨를 콘솔에서 보여줌
+    // -> setValue를 'x'로 설정하겠다.
+    setValue("X");
   }
 
   return (
@@ -18,19 +25,19 @@ export default function board() {
   return (
     <>
       <div className="board-row">
-        <Square value="1" />
-        <Square value="1" />
-        <Square value="1" />
+        <Square />
+        <Square />
+        <Square />
       </div>
       <div className="board-row">
-        <Square value="1" />
-        <Square value="1" />
-        <Square value="1" />
+        <Square />
+        <Square />
+        <Square />
       </div>
       <div className="board-row">
-        <Square value="1" />
-        <Square value="1" />
-        <Square value="1" />
+        <Square />
+        <Square />
+        <Square />
       </div>
     </>
   );
