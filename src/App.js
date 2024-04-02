@@ -1,6 +1,15 @@
 function Square({ value }) {
-  return <button className="square">{value}</button>; //value</button>; //중복되는 코드 함수화하기
-  //인수값을 받아서 보여주기
+  function handleClick() {
+    console.log("click");
+    //클릭이라는 글씨를 콘솔에서 보여줌
+  }
+
+  return (
+    <button className="square" onClick={handleClick}>
+      {value}
+    </button> //value</button>; //중복되는 코드 함수화하기
+    //인수값을 받아서 보여주기, onClick은 {handleClick} -> 클릭글씨 보여줌
+  );
 }
 
 export default function board() {
@@ -10,18 +19,18 @@ export default function board() {
     <>
       <div className="board-row">
         <Square value="1" />
-        <Square />
-        <Square />
+        <Square value="1" />
+        <Square value="1" />
       </div>
       <div className="board-row">
-        <Square />
-        <Square />
-        <Square />
+        <Square value="1" />
+        <Square value="1" />
+        <Square value="1" />
       </div>
       <div className="board-row">
-        <Square />
-        <Square />
-        <Square />
+        <Square value="1" />
+        <Square value="1" />
+        <Square value="1" />
       </div>
     </>
   );
