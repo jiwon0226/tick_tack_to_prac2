@@ -21,6 +21,10 @@ export default function Board() {
   //null값을 기본으로 갖는 9칸 배열을 갖는 squares라는 state 변수를 선언
 
   function handleClick(i) {
+    //null 값이 아니면 리턴
+    if (squares[i] || calculateWinner(squares)) {
+      return;
+    }
     const nextSquares = squares.slice(); //배열 내용 옮겨 담기, array 유지한 채, 껍데기 만들기
     if (xIsNext) {
       nextSquares[i] = "X";
@@ -31,8 +35,19 @@ export default function Board() {
     setSquares(nextSquares); //nextSquares를 변경된 state로 저장
     setXIsNext(!xIsNext); //순서가 끝나면 바꿔줘
   }
+
+  const winner = calculateWinner(squares);
+  let status;
+  if (winner) {
+    status = "Winner: " + winner;
+  } else {
+    status = "Next player: " + (xIsNext ? "X" : "O");
+  }
+
   return (
     <>
+      <div className="status">{status}</div>
+
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
         <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
@@ -56,3 +71,48 @@ export default function Board() {
   //() => handleClick(0)은 화살표 함수로, 함수를 짧게 정의할 수 있는 방법
   //value 프롭 전달 (squares)
 }
+
+export default function Game() {
+  const [xIsNext, setXIsNext] = useState(true);
+  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const currentSquares = history[history.length - 1];
+
+  function handlePlay(nextSquares) {
+    setHistory([...history, nextSquares]);
+    setXIsNext(!xIsNext);
+  }
+
+  return (
+    <div className="game">
+      <div className="game-board">
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+      </div>
+      <div className="game-info">
+        <ol>{/*TODO*/}</ol>
+      </div>
+    </div>
+  );
+}
+
+function calculateWinner(squares) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+      //각 요소가 같은 값인지 확인해서 같으면 상자안의 값 즉 o혹은 x를 반환하고
+    }
+  }
+  return null; //아니면 null을 반환하여 승자가없음을 밝힌다.
+}
+
+
