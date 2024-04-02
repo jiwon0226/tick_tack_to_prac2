@@ -22,23 +22,28 @@ function Square() {
 export default function board() {
   //함수 정의
   // export는 외부에서 접근할 수 있고, default는 다른 파일에서 주요 함수임을 알려줌
+
+  const [sequares, setSquares] = useState(Array(9).fill(null));
+  //틱택토는 9칸의 상태를 모두 알고 있어야 함
+  //null값을 기본으로 갖는 9칸 배열을 갖는 squares라는 state 변수를 선언
   return (
     <>
       <div className="board-row">
-        <Square />
-        <Square />
-        <Square />
+        <Square value={squares[0]} />
+        <Square value={squares[1]} />
+        <Square value={squares[2]} />
       </div>
       <div className="board-row">
-        <Square />
-        <Square />
-        <Square />
+        <Square value={squares[3]} />
+        <Square value={squares[4]} />
+        <Square value={squares[5]} />
       </div>
       <div className="board-row">
-        <Square />
-        <Square />
-        <Square />
+        <Square value={squares[6]} />
+        <Square value={squares[7]} />
+        <Square value={squares[8]} />
       </div>
     </>
   );
+  //value 프롭 전달 (squares)
 }
